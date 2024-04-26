@@ -1,14 +1,19 @@
+#define DEBUG true
+
 #include <iostream>
 #include <sstream>
 #include "Bot.h"
 #include "Assembly.h"
 
-#define DEBUG true
+#ifdef DEBUG
+#include "Assembler.h"
+#endif
 
 namespace ASMBot{
 	Bot::Bot(int memSize) {
-		mem = new uint8_t[memSize];
+		mem = new uint8_t[memSize] {0};
 		this->memSize = memSize;
+		this->SP = static_cast<uint16_t>(memSize - 1);
 	}
 
 	Bot::~Bot() {
@@ -60,7 +65,7 @@ namespace ASMBot{
 
 		std::cout
 				<< std::hex
-				<< "0x" << (int)instruction.opcode
+				<< Assembler::INSTRUCTIONS[instruction.opcode]
 				<< " [0x" << instruction.a.type
 				<< ":0x" << instruction.a.value
 				<< ", 0x" << instruction.b.type

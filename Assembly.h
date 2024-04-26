@@ -40,6 +40,8 @@ namespace ASMBot {
 	public:
 		OperandType type = NONE;
 		uint16_t value = 0;
+		bool shouldReparse = false; //Flag set by the assembler to mark that an operand should be rehearsed on the second pass
+		std::string str; //Also used by the assembler; The raw text of the operand in the assembler
 
 		/**
 		 * Gets the value of the appropriate register/immediate value/memory location on a bot.
@@ -51,7 +53,7 @@ namespace ASMBot {
 		 * Sets the value of the appropriate register/memory location on a bot.
 		 * @param bot The bot.
 		 */
-		void set(Bot& bot, uint16_t to);
+		void set(Bot& bot, uint16_t to) const;
 
 		/**
 		 * Gets if the operand has an immediate value associated with it.
@@ -74,6 +76,8 @@ namespace ASMBot {
 		void nop(Bot& bot, Instruction& instruction);
 		void mov(Bot& bot, Instruction& instruction);
 		void jmp(Bot& bot, Instruction& instruction);
+		void call(Bot& bot, Instruction& instruction);
+		void ret(Bot& bot, Instruction& instruction);
 	}
 
 	/**
@@ -84,7 +88,9 @@ namespace ASMBot {
 	static void (*OPCODES[])(Bot& bot, Instruction& instruction) = {
 			Instructions::nop,
 			Instructions::mov,
-			Instructions::jmp
+			Instructions::jmp,
+			Instructions::call,
+			Instructions::ret
 	};
 
 	/**
@@ -93,7 +99,9 @@ namespace ASMBot {
 	static int NUM_OPERANDS[] = {
 			0, //NOP
 			2, //MOV
-			1  //JMP
+			1, //JMP
+			1, //CALL
+			0  //RET
 	};
 }
 

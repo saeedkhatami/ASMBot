@@ -1,8 +1,7 @@
 #ifndef ASMBot_BOT_H
 #define ASMBot_BOT_H
 
-
-#include <stdint-gcc.h>
+#include <cstdint>
 
 namespace ASMBot {
 	/**

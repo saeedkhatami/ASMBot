@@ -4,13 +4,14 @@
 #include "Assembly.h"
 #include <iostream>
 #include <vector>
-
+#include <unordered_map>
 
 namespace ASMBot::Assembler{
-	void assemble(std::string assembly, std::vector<uint8_t>& out);
-	void parseOperand(std::string operandStr, Operand& operand);
-	static std::string INSTRUCTIONS[] = { //NOLINT
-			"nop", "mov", "jmp"
+	void assemble(std::istream& in, std::vector<uint8_t>& out);
+	void parseOperand(std::string operandStr, Operand& operand,
+					  std::unordered_map<std::string, uint16_t>* labels, bool secondPass);
+	static std::string INSTRUCTIONS[] = { // ADD LABELS
+			"nop", "mov", "jmp", "call", "ret"
 	};
 }
 

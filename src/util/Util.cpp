@@ -1,4 +1,4 @@
-#include "Util.h"
+#include <util/Util.h>
 
 namespace Util{
 	std::string& ltrim(std::string& str, const std::string& chars){
@@ -28,5 +28,17 @@ namespace Util{
 		}else{
 			return std::stoi(str);
 		}
+	}
+
+	bool checkCF(uint32_t res) {
+		return static_cast<bool>(res & 0x10000);
+	}
+
+	bool checkSF(uint16_t res) {
+		return static_cast<bool>(res >> 15);
+	}
+
+	bool checkZF(uint16_t res) {
+		return !res;
 	}
 }

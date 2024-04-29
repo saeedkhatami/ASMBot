@@ -2,7 +2,7 @@
 
 [Much Assembly Required](https://github.com/simon987/Much-Assembly-Required)
 
-As of now, this project is just an assembler and emulator for my custom 8086-like processor the bots will use.
+Just an assembler and emulator for my custom 8086-like BOT.
 
 ## Waht is going on
 
